@@ -1,7 +1,7 @@
 ////////////////////////////////////////
 ************INSTALLATION***************
 
-##STEP - 1
+#STEP - 1
 Extract WebApiNoteManagement and webNoteManagementByAngular file.
 
 ##STEP - 2
