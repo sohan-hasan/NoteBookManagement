@@ -1,0 +1,176 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Deshboard</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a routerLink="" routerLinkActive="active">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">Deshboard</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="btn btn-block btn-info btn-xs card-title bg-gradient-lightblue" style="width: 120px">
+                                Regular Note List
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px" class="text-center">SL #</th>
+                                        <th>Note</th>
+                                        <th class="text-center" style="width:125px;">Note Created Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of regularNoteList; let ndx = index">
+                                        <td class="text-center">{{ ndx + 1 }}</td>
+                                        <td>{{ item.note }}</td>
+                                        <td class="text-center" style="width:125px;">{{ item.noteDateTime | date:'M/d/yy, h:mm a' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="btn btn-block btn-info btn-xs card-title bg-gradient-lightblue" style="width: 120px">
+                                Reminder Note List
+                            </h3>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm">
+                                    <select class="form-control" (change)="getReminderList($any($event.target).value)">
+                                        <option value="all">All Notes</option>
+                                        <option value="today">Today's Notes</option>
+                                        <option value="weekly">This Week</option>
+                                        <option value="monthly">This Month</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px" class="text-center">SL #</th>
+                                        <th>Note</th>
+                                        <th class="text-center" style="width:125px;">Reminder Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of remindereList; let ndx = index">
+                                        <td class="text-center">{{ ndx + 1 }}</td>
+                                        <td>{{ item.note }}</td>
+                                        <td class="text-center" style="width:125px;">{{ item.reminderDateTime | date:'M/d/yy, h:mm a' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="btn btn-block btn-info btn-xs card-title bg-gradient-lightblue" style="width: 120px">
+                                Todo Note List
+                            </h3>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" (change)="getTodoList($any($event.target).value)">
+                                    <select class="form-control">
+                                        <option value="all">All Notes</option>
+                                        <option value="today">Today's Notes</option>
+                                        <option value="weekly">This Week</option>
+                                        <option value="monthly">This Month</option>
+                                  </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px" class="text-center">SL #</th>
+                                        <th>Note</th>
+                                        <th>Todo Date</th>
+                                        <th class="text-center" style="width:125px;">Work Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of todoNoteList; let ndx = index">
+                                        <td class="text-center">{{ ndx + 1 }}</td>
+                                        <td>{{ item.note }}</td>
+                                        <td>{{ item.todoDateTime | date:'M/d/yy, h:mm a' }}</td>
+                                        <td *ngIf="item.isComplete==0; else elseBlock" class="text-center text-white bg-red" style="width:125px;">
+                                            Incompleted
+                                        </td>
+                                        <ng-template #elseBlock>
+                                            <td class="text-center text-white bg-green" style="width:125px;">Completed</ng-template>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="btn btn-block btn-info btn-xs card-title bg-gradient-lightblue" style="width: 120px">
+                                Bookmark List
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px" class="text-center">SL #</th>
+                                        <th>Web Site Name</th>
+                                        <th>Web Site Url</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of bookmarkList; let ndx = index">
+                                        <td class="text-center">{{ ndx + 1 }}</td>
+                                        <td>{{ item.siteName }}</td>
+                                        <td>
+                                            <a [href]="item.bookmarkUrl" target="_blank">{{
+                        item.bookmarkUrl
+                      }}</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

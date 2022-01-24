@@ -1,0 +1,52 @@
+<div class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="../../index2.html" class="h1"><b>NOTE&nbsp;</b>BOOK</a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="User Name" formControlName="email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span *ngIf="email?.invalid && email?.touched" class="error invalid-message">Please enter a email address.</span>
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span *ngIf="password?.invalid && password?.touched" class="error invalid-message">Please enter your password.</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block" [disabled]="signInForm.invalid">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+                <a routerLink='/sign-up' routerLinkActive="active" class="text-center">Register a new membership</a>
+            </div>
+        </div>
+    </div>
+</div>

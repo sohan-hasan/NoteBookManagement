@@ -1,0 +1,109 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Regular Note</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="" routerLinkActive="active">Home</a></li>
+                        <li class="breadcrumb-item active">Regular Note</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <button data-toggle="modal" data-target="#noteModel" type="button" class="btn btn-block btn-info btn-xs card-title bg-navy" style="width: 120px;">New Note</button>
+
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px;" class="text-center">SL #</th>
+                                        <th>Note</th>
+                                        <th class="text-center" style="width:125px;">Note Created Time</th>
+                                        <th style="width: 40px;" class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of itemList; let ndx = index">
+                                        <td class="text-center">{{ndx + 1}}</td>
+                                        <td>{{item.note}}</td>
+                                        <td class="text-center" style="width:125px;">{{item.noteDateTime | date:'M/d/yy, h:mm a'}}</td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-info btn-xs bg-navy dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                                                        Action
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                                        <li><a class="dropdown-item" (click)="pupulateForm(item)" data-toggle="modal" data-target="#noteModel">Edit</a></li>
+                                                        <li><a class="dropdown-item" (click)="onDelete(item.regularNoteId)">Delete</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+</div>
+<div class="modal fade" id="noteModel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-navy">
+                <h4 class="modal-title">Regular Note</h4>
+                <button type="button" class="close text-white" #closebutton data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" (click)="clearForm()">×</span>
+                </button>
+            </div>
+            <form [formGroup]="regularNoteForm" (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                    <input type="hidden" formControlName="regularNoteId">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Note</label>
+                                <textarea class="form-control" rows="3" placeholder="Write here..." formControlName="note"></textarea>
+                                <div *ngIf="note?.invalid &&  formSubmitAttempt || note?.invalid &&  (note?.dirty || note?.touched)">
+                                    <span *ngIf="note?.hasError('required')" class="error invalid-message text-danger">Please enter
+                                        your
+                                        note.
+                                    </span>
+                                    <span *ngIf="note?.hasError('maxlength')" class="error invalid-message text-danger">Note Can contain at most 100 Characters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearForm()">Close</button>
+                    <button type="submit" class="btn btn-primary bg-navy"> Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<div class="hold-transition register-page">
+    <div class="register-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="../../index2.html" class="h1"><b>NOTE&nbsp;</b>BOOK</a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Register a new membership</p>
+
+                <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+                    <input type="hidden" formControlName="id">
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="name?.invalid &&  formSubmitAttempt || name?.invalid &&  (name?.dirty || name?.touched)">
+                            <span *ngIf="name?.hasError('required')" class="error invalid-message text-danger">Please enter
+                                your
+                                name.
+                            </span>
+                            <span *ngIf="name?.hasError('maxlength')" class="error invalid-message text-danger">Name Can contain at most 50 Characters</span>
+                            <span *ngIf="name?.hasError('minlength')" class="error invalid-message text-danger">Name must contain at least 4 Characters </span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="email?.invalid &&  formSubmitAttempt || email?.invalid &&  (email?.dirty || email?.touched)">
+                            <span *ngIf="email?.hasError('required')" class="error invalid-message text-danger">Please enter
+                                your
+                                email.
+                            </span>
+                            <span *ngIf="email?.hasError('email')" class="error invalid-message text-danger">Invalied email address.</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input type="date" class="form-control" placeholder="DOB" formControlName="dateOfBirth">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span *ngIf="dateOfBirth?.invalid && dateOfBirth?.touched" class="error invalid-message">Please enter your date of birth</span>
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="password?.invalid &&  formSubmitAttempt || password?.invalid &&  (password?.dirty || password?.touched)">
+                            <span *ngIf="password?.hasError('required')" class="error invalid-message text-danger">Please enter
+                                doctor
+                                name.
+                            </span>
+                            <span *ngIf="password?.hasError('minlength')" class="error invalid-message text-danger">Password must contain at least 6 Characters </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                <label for="agreeTerms">
+                                    I agree to the <a href="#">terms</a>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block" [disabled]="signUpForm.invalid">Sign Up</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <a routerLink="/sign-in" routerLinkActive="active" class="text-center">I already have a membership</a>
+            </div>
+            <!-- /.form-box -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
