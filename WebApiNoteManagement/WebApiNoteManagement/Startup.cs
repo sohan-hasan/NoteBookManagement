@@ -78,6 +78,7 @@ namespace WebApiNoteManagement
             services.AddScoped<IRegularNoteRepository, RegularNoteRepository>();
             services.AddScoped<IReminderRepository, ReminderRepository>();
             services.AddScoped<ITodoRepository, TodoRepository>();
+            services.AddHostedService<TimedHostedService>();
 
             services.AddSwaggerGen(c =>
             {

@@ -40,17 +40,7 @@ export class NavbarComponent implements OnInit {
         this.signaldata.push(message);
       }
     })
-    this.timerSubscription = timer(0, 60000).pipe( 
-      map(() => { 
-        this.sendRequestForDo(); // load data contains the http request 
-      }) 
-    ).subscribe();
   }
-  sendRequestForDo() {
-    this.reminderService.sendRequestForDo().subscribe((data: any) => {
-    }, error => {
-    })
-  } 
   onLogout() {
     localStorage.removeItem(Constants.USER_KEY);
     this.router.navigate(["/sign-in"]);
