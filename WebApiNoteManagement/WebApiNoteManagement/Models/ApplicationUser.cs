@@ -17,7 +17,7 @@ namespace WebApiNoteManagement.Models
 
             this.Id = userId;
             base.UserName = userName;
-            this.Name = name;
+            this.Name = name;  
             this.DateOfBirth = dateOfBirth;
             this.Email = email;
         }
